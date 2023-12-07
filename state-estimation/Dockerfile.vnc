@@ -61,7 +61,12 @@ CMD ["dt-launcher-vnc"]
 # <== Do not change the code above this line
 # <==================================================
 
-RUN pip3 uninstall dataclasses -y
+# atp1: add fix for incompatible ruamel.yaml python package
+RUN pip3 uninstall -y \
+    dataclasses \
+    ruamel.yaml
+
+RUN pip3 install -U ruamel.yaml==0.16.0
 
 # copy stuff for the user directory
 COPY --from=recipe assets/vnc/root/Desktop/. /root/Desktop/
